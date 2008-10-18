@@ -14,8 +14,10 @@
 
 #define PLUGIN_NAME "Manilla2D-DevTools-Enable"
 
+#include "resource.h"
 
 //global variables    
+HICON               g_hIcon;
 UINT                g_plugInHeight;
 HINSTANCE           g_hInst;
 HWND                g_hWnd;
@@ -44,6 +46,9 @@ BOOL APIENTRY DllMain( HANDLE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
         // Perform per-process initialization here.  If the initialization
         // is successful, return TRUE; if unsuccessful, return FALSE.
         g_hInst = (HINSTANCE)hModule;
+
+        //load the icon
+        g_hIcon = (HICON)LoadImage(g_hInst, MAKEINTRESOURCE(IDI_DISPLAYICON), IMAGE_ICON, DRA::SCALEX(16), DRA::SCALEY(16) ,LR_DEFAULTCOLOR);
                 
         //initilize the application class, and set the global window handle
         UnregisterClass(TEXT(PLUGIN_NAME), g_hInst);
@@ -56,6 +61,8 @@ BOOL APIENTRY DllMain( HANDLE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
         // The DLL is being unloaded by a given process.  Do any
         // per-process clean up here, such as undoing what was done in
         // DLL_PROCESS_ATTACH.    The return value is ignored.
+
+        DestroyIcon(g_hIcon);
         
         UnregisterClass(TEXT(PLUGIN_NAME), g_hInst);
         g_hInst = NULL;
@@ -169,6 +176,7 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT uimessage, WPARAM wParam, LPARAM lPara
         
         // draw the icon on the screen
         SetBkMode(hDC, TRANSPARENT);
+        DrawIcon(hDC, 2, 0, g_hIcon);
         
         BOOL bIsFarEast;
         LOGFONT lf;
