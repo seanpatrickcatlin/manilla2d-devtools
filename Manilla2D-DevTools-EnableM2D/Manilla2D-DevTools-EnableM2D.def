@@ -1,0 +1,7 @@
+; Manilla2D-DevTools-EnableM2D.def : Declares the module parameters for the DLL.
+
+LIBRARY      "Manilla2D-DevTools-EnableM2D"
+
+EXPORTS
+InitializeCustomItem		@240	NONAME
+    ; Explicit exports can go here
