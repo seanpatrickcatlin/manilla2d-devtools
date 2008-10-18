@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Manilla2D-DevTools-EnableM2
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Manilla2D-DevTools-DisableM2D", "Manilla2D-DevTools-DisableM2D\Manilla2D-DevTools-DisableM2D.vcproj", "{0A114824-9E83-4212-93AD-4D59C0C6B595}"
 EndProject
+Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "Manilla2D-DevToolsCab", "Manilla2D-DevToolsCab\Manilla2D-DevToolsCab.vddproj", "{5C12A634-133B-4355-8A77-61B0AF009ACF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Windows Mobile 6 Professional SDK (ARMV4I) = Debug|Windows Mobile 6 Professional SDK (ARMV4I)
@@ -23,6 +25,11 @@ Global
 		{0A114824-9E83-4212-93AD-4D59C0C6B595}.Release|Windows Mobile 6 Professional SDK (ARMV4I).ActiveCfg = Release|Windows Mobile 6 Professional SDK (ARMV4I)
 		{0A114824-9E83-4212-93AD-4D59C0C6B595}.Release|Windows Mobile 6 Professional SDK (ARMV4I).Build.0 = Release|Windows Mobile 6 Professional SDK (ARMV4I)
 		{0A114824-9E83-4212-93AD-4D59C0C6B595}.Release|Windows Mobile 6 Professional SDK (ARMV4I).Deploy.0 = Release|Windows Mobile 6 Professional SDK (ARMV4I)
+		{5C12A634-133B-4355-8A77-61B0AF009ACF}.Debug|Windows Mobile 6 Professional SDK (ARMV4I).ActiveCfg = Debug
+		{5C12A634-133B-4355-8A77-61B0AF009ACF}.Debug|Windows Mobile 6 Professional SDK (ARMV4I).Build.0 = Debug
+		{5C12A634-133B-4355-8A77-61B0AF009ACF}.Debug|Windows Mobile 6 Professional SDK (ARMV4I).Deploy.0 = Debug
+		{5C12A634-133B-4355-8A77-61B0AF009ACF}.Release|Windows Mobile 6 Professional SDK (ARMV4I).ActiveCfg = Release
+		{5C12A634-133B-4355-8A77-61B0AF009ACF}.Release|Windows Mobile 6 Professional SDK (ARMV4I).Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
