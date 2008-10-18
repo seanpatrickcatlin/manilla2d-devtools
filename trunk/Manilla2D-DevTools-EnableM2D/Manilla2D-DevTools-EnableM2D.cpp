@@ -22,16 +22,11 @@ UINT                g_plugInHeight;
 HINSTANCE           g_hInst;
 HWND                g_hWnd;
 BOOL                g_bFirstDisplay         = TRUE;
-HWND                g_hStorageProgressBar;
-HWND                g_hProgramProgressBar;
-UINT                g_StorageMemUsed;
-UINT                g_ProgramMemUsed;
-BOOL                g_fShowStorage          = TRUE;
-BOOL                g_fShowProgram          = TRUE;
 
 
 // forward function declarations
 static INT InitializeClasses();
+static void EnableM2D();
 
 /*************************************************************************/
 /* Entry point for the dll                                                 */
@@ -48,7 +43,7 @@ BOOL APIENTRY DllMain( HANDLE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
         g_hInst = (HINSTANCE)hModule;
 
         //load the icon
-        g_hIcon = (HICON)LoadImage(g_hInst, MAKEINTRESOURCE(IDI_DISPLAYICON), IMAGE_ICON, DRA::SCALEX(16), DRA::SCALEY(16) ,LR_DEFAULTCOLOR);
+        g_hIcon = (HICON)LoadImage(g_hInst, MAKEINTRESOURCE(IDI_DISPLAYICON), IMAGE_ICON, DRA::SCALEX(48), DRA::SCALEY(48) ,LR_DEFAULTCOLOR);
                 
         //initilize the application class, and set the global window handle
         UnregisterClass(TEXT(PLUGIN_NAME), g_hInst);
@@ -87,14 +82,11 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT uimessage, WPARAM wParam, LPARAM lPara
     {          
         //check to see if a refresh is required
     case WM_TODAYCUSTOM_QUERYREFRESHCACHE: 
-        {
+        {   
+            
             TODAYLISTITEM *ptliItem;
-            MEMORYSTATUS MemStatus;
-            STORE_INFORMATION StoreInfo;
             INT iItemHeight;
             
-            UINT iCurrentStore;
-            DOUBLE dCurrentStore;
             BOOL    bReturn = FALSE;
             
             // get the pointer to the item from the Today screen
@@ -104,55 +96,24 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT uimessage, WPARAM wParam, LPARAM lPara
             {
                 return FALSE;
             }
-            
-            g_fShowStorage = TRUE;//!(ptliItem->grfFlags & FLAGS_HIDE_STORAGE);
-            g_fShowProgram = TRUE;//!(ptliItem->grfFlags & FLAGS_HIDE_PROGRAM);
 
-            // adjust the height of the today item based on showing one or two bars
-            if (g_fShowProgram && g_fShowStorage)
-            {
-                iItemHeight = DRA::SCALEY(40);
-            }
-            else
-            {
-                iItemHeight = DRA::SCALEY(20);
-            }
-            
-            // determine % memory space and see if it has changed
-            GlobalMemoryStatus(&MemStatus);
-            if(g_ProgramMemUsed != MemStatus.dwMemoryLoad)
-            {
-                g_ProgramMemUsed = MemStatus.dwMemoryLoad;
-                bReturn = TRUE;
-            }
-            
-            // determine % storage space and see if it has changed
-            GetStoreInformation(&StoreInfo);
-            dCurrentStore = ((((DOUBLE)StoreInfo.dwStoreSize - (DOUBLE)StoreInfo.dwFreeSize) / (DOUBLE)StoreInfo.dwStoreSize) * 100);
-            iCurrentStore = (INT)dCurrentStore;
-            
-            if(g_StorageMemUsed != iCurrentStore)
-            {
-                g_StorageMemUsed = iCurrentStore;
-                bReturn = TRUE;
-            }
-            
+            iItemHeight = DRA::SCALEY(52);
+
             if (0 == ptliItem->cyp)
             {
                 ptliItem->cyp = iItemHeight;
                 bReturn = TRUE;
             }
-            
+
+
             return bReturn;
-            
-            
         }        
         
     case WM_CREATE:         
         break;
         
     case WM_LBUTTONUP: 
-        MessageBox(NULL, TEXT("Detected Screen Tap!"), TEXT("StorageCheck Today Item:"), MB_OK);
+        EnableM2D();
         break;          
         
     case WM_PAINT: 
@@ -161,7 +122,6 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT uimessage, WPARAM wParam, LPARAM lPara
         RECT            rcMyBounds;
         HDC             hDC;
         HFONT            hFontOld;
-        TCHAR            szTextBuffer[10];
         COLORREF        crText;
 
         GetWindowRect( hwnd, &rcWindBounds); 
@@ -228,71 +188,8 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT uimessage, WPARAM wParam, LPARAM lPara
         // set that color
         SetTextColor(hDC, crText);
 
-        // determine if there is one or two bars to paint
-        if(g_fShowProgram && g_fShowStorage)
-        {
-            // update and paint storage status bar
-            SendMessage(g_hStorageProgressBar, PBM_SETPOS, g_StorageMemUsed, NULL);
-            SetWindowPos(g_hStorageProgressBar, g_hWnd, DRA::SCALEX(85), DRA::SCALEY(4), DRA::SCALEX(120), DRA::SCALEY(10), SWP_SHOWWINDOW);
-            
-            // update and paint program status bar
-            SendMessage(g_hProgramProgressBar, PBM_SETPOS, g_ProgramMemUsed, NULL);
-            SetWindowPos(g_hProgramProgressBar, g_hWnd, DRA::SCALEX(85), DRA::SCALEY(24), DRA::SCALEX(120), DRA::SCALEY(10), SWP_SHOWWINDOW);
-
-            // draw the storage item text
-            rcMyBounds.left = rcMyBounds.left + DRA::SCALEX(28);
-            DrawText(hDC, TEXT("Storage:"), -1, &rcMyBounds, DT_LEFT);
-            
-            // draw the program item text
-            rcMyBounds.top += DRA::SCALEX(20);
-            DrawText(hDC, TEXT("Program:"), -1, &rcMyBounds, DT_LEFT);
-            
-            // draw the program item % text
-            rcMyBounds.left = DRA::SCALEX(210);
-            wsprintf(szTextBuffer, TEXT("%i%%"), g_ProgramMemUsed);
-            DrawText(hDC, szTextBuffer, -1, &rcMyBounds, DT_LEFT);
-            
-            // draw the storage item % text
-            rcMyBounds.top = DRA::SCALEY(2);
-            wsprintf(szTextBuffer, TEXT("%i%%"), g_StorageMemUsed);
-            DrawText(hDC, szTextBuffer, -1, &rcMyBounds, DT_LEFT);
-            
-        }
-        else
-        {
-            // if only show program memory is checked
-            if(g_fShowProgram)
-            {
-                // update and paint program status bar
-                SendMessage(g_hProgramProgressBar, PBM_SETPOS, g_ProgramMemUsed, NULL);
-                SetWindowPos(g_hProgramProgressBar, g_hWnd, DRA::SCALEX(85), DRA::SCALEY(4), DRA::SCALEX(120), DRA::SCALEY(10), SWP_SHOWWINDOW);
-                
-                // draw the program item text
-                rcMyBounds.left = rcMyBounds.left + DRA::SCALEX(28);
-                DrawText(hDC, TEXT("Program:"), -1, &rcMyBounds, DT_LEFT);
-                
-                // draw the program item % text
-                rcMyBounds.left = DRA::SCALEX(210);
-                wsprintf(szTextBuffer, TEXT("%i%%"), g_ProgramMemUsed);
-                DrawText(hDC, szTextBuffer, -1, &rcMyBounds, DT_LEFT);
-            }
-            // if only show storage memory is checked
-            else
-            {
-                // update and paint storage status bar
-                SendMessage(g_hStorageProgressBar, PBM_SETPOS, g_StorageMemUsed, NULL);
-                SetWindowPos(g_hStorageProgressBar, g_hWnd, DRA::SCALEX(85), DRA::SCALEX(4), DRA::SCALEX(120), DRA::SCALEX(10), SWP_SHOWWINDOW);
-                
-                // draw the storage item text
-                rcMyBounds.left = rcMyBounds.left + DRA::SCALEX(28);
-                DrawText(hDC, TEXT("Storage:"), -1, &rcMyBounds, DT_LEFT);
-                
-                // draw the storage item % text
-                rcMyBounds.left = DRA::SCALEX(210);
-                wsprintf(szTextBuffer, TEXT("%i%%"), g_StorageMemUsed);
-                DrawText(hDC, szTextBuffer, -1, &rcMyBounds, DT_LEFT);
-            }
-        }
+        rcMyBounds.left = rcMyBounds.left + DRA::SCALEX(62);
+        DrawText(hDC, TEXT("*** Tap To Enable TouchFlo ***"), -1, &rcMyBounds, DT_LEFT);
         
         // Select the previous font back into the device context
         SelectObject(hDC, hFontOld);
@@ -355,24 +252,6 @@ HWND InitializeCustomItem(TODAYLISTITEM *ptli, HWND hwndParent)
     g_hWnd = CreateWindow(appName,appName,WS_VISIBLE | WS_CHILD,
         CW_USEDEFAULT,CW_USEDEFAULT,240,0,hwndParent, NULL, g_hInst, NULL) ;
     
-    // create the storage space progress bar
-    g_hStorageProgressBar = CreateWindow(PROGRESS_CLASS, TEXT("Storage Progress Bar"), 
-        WS_CHILD | PBS_SMOOTH, CW_USEDEFAULT,CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT
-        ,g_hWnd, NULL, g_hInst, NULL);
-    
-    // adjust the step to be in 1% increments
-    SendMessage(g_hStorageProgressBar,PBM_SETSTEP,1,NULL); 
-    
-    // create the program memory progress bar
-    g_hProgramProgressBar = CreateWindow(PROGRESS_CLASS, TEXT("Program Progress Bar"), 
-        WS_CHILD | PBS_SMOOTH, CW_USEDEFAULT,CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT
-        ,g_hWnd, NULL, g_hInst, NULL);
-    
-    
-    // adjust the step to be in 1% increments
-    SendMessage(g_hProgramProgressBar,PBM_SETSTEP,1,NULL); 
-    
-    
     // attach our winproc to the newly created window
     SetWindowLong(g_hWnd, GWL_WNDPROC, (LONG) WndProc);
     
@@ -381,4 +260,74 @@ HWND InitializeCustomItem(TODAYLISTITEM *ptli, HWND hwndParent)
     UpdateWindow (g_hWnd) ;  
     
     return g_hWnd;
+}
+
+void EnableM2D()
+{
+    //MessageBox(g_hWnd, TEXT("Enable M2D"), TEXT("Enable M2D"), MB_OK);
+
+    HKEY mainHKey;
+    DWORD enabledState = 0;
+    TCHAR mainKeyName[MAX_PATH];
+    TCHAR subKeyName[MAX_PATH];
+    TCHAR valueName[MAX_PATH];
+
+    // backup the date enabled state
+    wsprintf(mainKeyName, TEXT("\\Software\\Microsoft\\Today"));
+    
+    if(RegOpenKeyEx(HKEY_LOCAL_MACHINE, mainKeyName, 0, 0, &mainHKey) == ERROR_SUCCESS)
+    {
+        wsprintf(valueName, TEXT("Date"));
+        enabledState = FALSE;
+        RegSetValueEx(mainHKey, valueName, NULL, REG_DWORD, (CONST BYTE*)&enabledState, sizeof(DWORD));
+        RegFlushKey(mainHKey);
+        RegCloseKey(mainHKey);
+    }
+
+    // enumerate the sub items of the today screen
+    wsprintf(mainKeyName, TEXT("\\Software\\Microsoft\\Today\\Items"));
+
+    if(RegOpenKeyEx(HKEY_LOCAL_MACHINE, mainKeyName, 0, 0, &mainHKey) == ERROR_SUCCESS)
+    {
+        HKEY subHKey;
+        DWORD subKeyIndex = 0;
+        DWORD subKeyBufferSize = MAX_PATH;
+        TCHAR subKeyBuffer[MAX_PATH];
+
+        LONG retVal = RegEnumKeyEx(mainHKey, subKeyIndex, subKeyBuffer, &subKeyBufferSize, NULL, NULL, NULL, NULL);
+
+        while(retVal == ERROR_SUCCESS)
+        {
+            enabledState = 0;
+
+            wsprintf(subKeyName, TEXT("\\Software\\Microsoft\\Today\\Items\\%s"), subKeyBuffer);
+
+            if(RegOpenKeyEx(HKEY_LOCAL_MACHINE, subKeyName, 0, 0, &subHKey) == ERROR_SUCCESS)
+            {
+                wsprintf(valueName, TEXT("Enabled"));
+
+                if(_tcscmp(subKeyBuffer, TEXT("TouchFLO")) == 0)
+                {
+                    enabledState = TRUE;
+                }
+                else
+                {
+                    enabledState = FALSE;
+                }
+
+                RegSetValueEx(subHKey, valueName, NULL, REG_DWORD, (CONST BYTE*)&enabledState, sizeof(DWORD));
+                RegFlushKey(subHKey);
+                RegCloseKey(subHKey);
+            }
+
+            subKeyIndex++;
+            subKeyBufferSize = MAX_PATH;
+            retVal = RegEnumKeyEx(mainHKey, subKeyIndex, subKeyBuffer, &subKeyBufferSize, NULL, NULL, NULL, NULL);
+        }
+
+        RegFlushKey(mainHKey);
+        RegCloseKey(mainHKey);
+    }
+
+    ::PostMessage(HWND_BROADCAST, WM_WININICHANGE, 0xF2, 0);
 }
