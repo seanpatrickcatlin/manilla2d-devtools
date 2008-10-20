@@ -26,6 +26,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5726094D1BBA45C384705F12FF90BEBC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_805B00383CED499AB75EAECD2C4A1505"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -62,6 +68,24 @@
     {
         "File"
         {
+            "{BA458234-9B71-4F46-8107-E91156377184}:_5726094D1BBA45C384705F12FF90BEBC"
+            {
+            "SourcePath" = "8:gpl.txt"
+            "TargetName" = "8:gpl.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_27C3CDB530B1429DA0D3CDDDC698A24E"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "Folder"
         {
