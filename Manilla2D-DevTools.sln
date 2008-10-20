@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Manilla2D-DevTools-DisableM
 EndProject
 Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "Manilla2D-DevToolsCab", "Manilla2D-DevToolsCab\Manilla2D-DevToolsCab.vddproj", "{5C12A634-133B-4355-8A77-61B0AF009ACF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Manilla2D-DevTools-EnableM2D-App", "Manilla2D-DevTools-EnableM2D-App\Manilla2D-DevTools-EnableM2D-App.vcproj", "{E4FD4360-C570-4953-9FBE-155F24FD6FD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Windows Mobile 6 Professional SDK (ARMV4I) = Debug|Windows Mobile 6 Professional SDK (ARMV4I)
@@ -30,6 +32,12 @@ Global
 		{5C12A634-133B-4355-8A77-61B0AF009ACF}.Debug|Windows Mobile 6 Professional SDK (ARMV4I).Deploy.0 = Debug
 		{5C12A634-133B-4355-8A77-61B0AF009ACF}.Release|Windows Mobile 6 Professional SDK (ARMV4I).ActiveCfg = Release
 		{5C12A634-133B-4355-8A77-61B0AF009ACF}.Release|Windows Mobile 6 Professional SDK (ARMV4I).Build.0 = Release
+		{E4FD4360-C570-4953-9FBE-155F24FD6FD3}.Debug|Windows Mobile 6 Professional SDK (ARMV4I).ActiveCfg = Debug|Windows Mobile 6 Professional SDK (ARMV4I)
+		{E4FD4360-C570-4953-9FBE-155F24FD6FD3}.Debug|Windows Mobile 6 Professional SDK (ARMV4I).Build.0 = Debug|Windows Mobile 6 Professional SDK (ARMV4I)
+		{E4FD4360-C570-4953-9FBE-155F24FD6FD3}.Debug|Windows Mobile 6 Professional SDK (ARMV4I).Deploy.0 = Debug|Windows Mobile 6 Professional SDK (ARMV4I)
+		{E4FD4360-C570-4953-9FBE-155F24FD6FD3}.Release|Windows Mobile 6 Professional SDK (ARMV4I).ActiveCfg = Release|Windows Mobile 6 Professional SDK (ARMV4I)
+		{E4FD4360-C570-4953-9FBE-155F24FD6FD3}.Release|Windows Mobile 6 Professional SDK (ARMV4I).Build.0 = Release|Windows Mobile 6 Professional SDK (ARMV4I)
+		{E4FD4360-C570-4953-9FBE-155F24FD6FD3}.Release|Windows Mobile 6 Professional SDK (ARMV4I).Deploy.0 = Release|Windows Mobile 6 Professional SDK (ARMV4I)
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
