@@ -17,4 +17,5 @@
 
 #pragma once
 
-void EnableM2D();
+void EnableM2D(bool bRefreshIfNeeded = true);
+

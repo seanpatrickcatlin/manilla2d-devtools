@@ -19,7 +19,7 @@
 
 #include <windows.h>
 
-void EnableM2D()
+void EnableM2D(bool bRefreshIfNeeded /*= true*/)
 {
     //MessageBox(g_hWnd, TEXT("Enable M2D"), TEXT("Enable M2D"), MB_OK);
 
@@ -28,6 +28,10 @@ void EnableM2D()
     TCHAR mainKeyName[MAX_PATH];
     TCHAR subKeyName[MAX_PATH];
     TCHAR valueName[MAX_PATH];
+
+    DWORD varTypeDword = REG_DWORD;
+    DWORD varSizeDword = sizeof(DWORD);
+
 
     // backup the date enabled state
     wsprintf(mainKeyName, TEXT("\\Software\\Microsoft\\Today"));
@@ -65,7 +69,24 @@ void EnableM2D()
 
                 if(_tcscmp(subKeyBuffer, TEXT("TouchFLO")) == 0)
                 {
-                    enabledState = TRUE;
+                    if(bRefreshIfNeeded)
+                    {
+                        RegQueryValueEx(subHKey, valueName, NULL, &varTypeDword, (LPBYTE)&enabledState, &varSizeDword);
+
+                        if(enabledState == TRUE)
+                        {
+                            enabledState = FALSE;
+                        }
+                        else
+                        {
+                            enabledState = TRUE;
+                            bRefreshIfNeeded = false;
+                        }
+                    }
+                    else
+                    {
+                        enabledState = TRUE;
+                    }
                 }
                 else
                 {
@@ -87,4 +108,9 @@ void EnableM2D()
     }
 
     ::PostMessage(HWND_BROADCAST, WM_WININICHANGE, 0xF2, 0);
+
+    if(bRefreshIfNeeded)
+    {
+        EnableM2D(false);
+    }
 }
