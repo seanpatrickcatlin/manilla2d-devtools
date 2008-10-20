@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="Manilla2D-DevTools-EnableM2D"
-	ProjectGUID="{3B0400F5-C03D-41C5-9ACB-A72ACA30EC81}"
-	RootNamespace="Manilla2D-DevTools-EnableM2D"
+	Name="Manilla2D-DevTools-EnableM2D-Plugin"
+	ProjectGUID="{321C9FA7-E68F-4D12-ABAC-435DB0156A73}"
+	RootNamespace="Manilla2D-DevTools-EnableM2D-Plugin"
 	Keyword="MFCDLLProj"
 	TargetFrameworkVersion="196613"
 	>
@@ -66,18 +66,15 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,5.02"
-				AdditionalDependencies="aygshell.lib libcmtd.lib"
-				OutputFile="$(OutDir)/Manilla2D-DevTools-EnableM2D.dll"
+				OutputFile="$(OutDir)/Manilla2D-DevTools-EnableM2D-Plugin.dll"
 				LinkIncremental="2"
-				IgnoreDefaultLibraryNames="oldnames.lib"
-				ModuleDefinitionFile=".\Manilla2D-DevTools-EnableM2D.def"
-				DelayLoadDLLs="$(NOINHERIT)"
+				ModuleDefinitionFile=".\Manilla2D-DevTools-EnableM2D-Plugin.def"
 				GenerateDebugInformation="true"
 				StackReserveSize="65536"
 				StackCommitSize="4096"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="$(OutDir)/Manilla2D-DevTools-EnableM2D.lib"
+				ImportLibrary="$(OutDir)/Manilla2D-DevTools-EnableM2D-Plugin.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -156,18 +153,15 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions=" /subsystem:windowsce,5.02"
-				AdditionalDependencies="aygshell.lib libcmt.lib"
-				OutputFile="$(OutDir)/Manilla2D-DevTools-EnableM2D.dll"
+				OutputFile="$(OutDir)/Manilla2D-DevTools-EnableM2D-Plugin.dll"
 				LinkIncremental="1"
-				IgnoreDefaultLibraryNames="oldnames.lib"
-				ModuleDefinitionFile=".\Manilla2D-DevTools-EnableM2D.def"
-				DelayLoadDLLs="$(NOINHERIT)"
+				ModuleDefinitionFile=".\Manilla2D-DevTools-EnableM2D-Plugin.def"
 				GenerateDebugInformation="true"
 				StackReserveSize="65536"
 				StackCommitSize="4096"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="$(OutDir)/Manilla2D-DevTools-EnableM2D.lib"
+				ImportLibrary="$(OutDir)/Manilla2D-DevTools-EnableM2D-Plugin.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -206,40 +200,22 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\Manilla2D-DevTools-EnableM2D-Plugin.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Manilla2D-DevTools-EnableM2D-Plugin.def"
+				>
+			</File>
+			<File
 				RelativePath="..\Manilla2D-DevTools-EnableM2D-App\Manilla2D-DevTools-EnableM2D-Util.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Manilla2D-DevTools-EnableM2D.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Windows Mobile 6 Professional SDK (ARMV4I)"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\Manilla2D-DevTools-EnableM2D.def"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			>
-			<File
-				RelativePath="..\Manilla2D-DevTools-EnableM2D-App\Manilla2D-DevTools-EnableM2D.ico"
-				>
-			</File>
-			<File
-				RelativePath=".\todayitem.rc"
 				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
 				RelativePath="..\Manilla2D-DevTools-EnableM2D-App\Manilla2D-DevTools-EnableM2D-Util.h"
@@ -247,6 +223,20 @@
 			</File>
 			<File
 				RelativePath=".\resource.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
+			<File
+				RelativePath="..\Manilla2D-DevTools-EnableM2D-App\Manilla2D-DevTools-EnableM2D.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\todayitem.rc"
 				>
 			</File>
 		</Filter>
