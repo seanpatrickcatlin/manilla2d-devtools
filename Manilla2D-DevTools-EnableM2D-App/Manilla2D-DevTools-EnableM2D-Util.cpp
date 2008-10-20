@@ -107,7 +107,7 @@ void EnableM2D(bool bRefreshIfNeeded /*= true*/)
         RegCloseKey(mainHKey);
     }
 
-    ::PostMessage(HWND_BROADCAST, WM_WININICHANGE, 0xF2, 0);
+    ::SendMessage(HWND_BROADCAST, WM_WININICHANGE, 0xF2, 0);
 
     if(bRefreshIfNeeded)
     {

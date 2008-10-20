@@ -33,8 +33,6 @@
 
 #include "resource.h"
 
-#include "Manilla2D-DevTools-EnableM2D-Util.h"
-
 //global variables    
 HICON               g_hIcon;
 UINT                g_plugInHeight;
@@ -45,6 +43,8 @@ BOOL                g_bFirstDisplay         = TRUE;
 
 // forward function declarations
 static INT InitializeClasses();
+
+static void Call_Manilla2D_DevTools_EnableM2D_App();
 
 /*************************************************************************/
 /* Entry point for the dll                                                 */
@@ -61,7 +61,7 @@ BOOL APIENTRY DllMain( HANDLE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
         g_hInst = (HINSTANCE)hModule;
 
         //load the icon
-        g_hIcon = (HICON)LoadImage(g_hInst, MAKEINTRESOURCE(IDI_DISPLAYICON), IMAGE_ICON, DRA::SCALEX(48), DRA::SCALEY(48) ,LR_DEFAULTCOLOR);
+        g_hIcon = (HICON)LoadImage(g_hInst, MAKEINTRESOURCE(IDI_DISPLAYICON), IMAGE_ICON, DRA::SCALEX(32), DRA::SCALEY(32) ,LR_DEFAULTCOLOR);
                 
         //initilize the application class, and set the global window handle
         UnregisterClass(TEXT(PLUGIN_NAME), g_hInst);
@@ -115,7 +115,7 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT uimessage, WPARAM wParam, LPARAM lPara
                 return FALSE;
             }
 
-            iItemHeight = DRA::SCALEY(52);
+            iItemHeight = DRA::SCALEY(36);
 
             if (0 == ptliItem->cyp)
             {
@@ -131,7 +131,7 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT uimessage, WPARAM wParam, LPARAM lPara
         break;
         
     case WM_LBUTTONUP: 
-        EnableM2D();
+        Call_Manilla2D_DevTools_EnableM2D_App();
         break;          
         
     case WM_PAINT: 
@@ -206,7 +206,7 @@ LRESULT CALLBACK WndProc (HWND hwnd, UINT uimessage, WPARAM wParam, LPARAM lPara
         // set that color
         SetTextColor(hDC, crText);
 
-        rcMyBounds.left = rcMyBounds.left + DRA::SCALEX(62);
+        rcMyBounds.left = rcMyBounds.left + DRA::SCALEX(35);
         DrawText(hDC, TEXT("*** Tap To Enable TouchFlo ***"), -1, &rcMyBounds, DT_LEFT);
         
         // Select the previous font back into the device context
@@ -278,4 +278,32 @@ HWND InitializeCustomItem(TODAYLISTITEM *ptli, HWND hwndParent)
     UpdateWindow (g_hWnd) ;  
     
     return g_hWnd;
+}
+
+static void Call_Manilla2D_DevTools_EnableM2D_App()
+{
+    TCHAR binaryPath[MAX_PATH];
+    if(GetModuleFileName(g_hInst, binaryPath, MAX_PATH) > 0)
+    {
+        // reverse search through the string, truncate it
+        int strLen = _tcsclen(binaryPath);
+
+        for(int i=strLen; i>0; i--)
+        {
+            if(binaryPath[i] == '\\')
+            {
+                binaryPath[i] = '\0';
+                break;
+            }
+        }
+    }
+    else
+    {
+        wsprintf(binaryPath, TEXT("."));
+    }
+
+    TCHAR commandToRun[MAX_PATH];
+    wsprintf(commandToRun, TEXT("%s\\%s"), binaryPath, TEXT("Manilla2D-DevTools-EnableM2D-App.exe"));
+
+    CreateProcess(commandToRun, NULL, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, NULL, NULL);
 }
