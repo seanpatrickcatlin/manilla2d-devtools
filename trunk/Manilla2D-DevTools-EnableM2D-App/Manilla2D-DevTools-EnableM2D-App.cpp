@@ -71,7 +71,7 @@
 #define new DEBUG_NEW
 #endif
 
-#include "Manilla2D-DevTools-EnableM2D.h"
+#include "Manilla2D-DevTools-EnableM2D-Util.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
