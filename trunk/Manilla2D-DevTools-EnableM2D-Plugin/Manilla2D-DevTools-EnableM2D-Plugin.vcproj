@@ -207,20 +207,12 @@
 				RelativePath=".\Manilla2D-DevTools-EnableM2D-Plugin.def"
 				>
 			</File>
-			<File
-				RelativePath="..\Manilla2D-DevTools-EnableM2D-App\Manilla2D-DevTools-EnableM2D-Util.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath="..\Manilla2D-DevTools-EnableM2D-App\Manilla2D-DevTools-EnableM2D-Util.h"
-				>
-			</File>
 			<File
 				RelativePath=".\resource.h"
 				>
