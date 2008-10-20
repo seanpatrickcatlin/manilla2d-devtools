@@ -44,6 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
+				AdditionalIncludeDirectories="&quot;..\Manilla2D-DevTools-EnableM2D-App&quot;"
 				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;_USRDLL;$(ARCHFAM);$(_ARCHFAM_);POCKETPC2003_UI_MODEL"
 				RuntimeLibrary="1"
 				UsePrecompiledHeader="0"
@@ -133,6 +134,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
+				AdditionalIncludeDirectories="&quot;..\Manilla2D-DevTools-EnableM2D-App&quot;"
 				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;_USRDLL;$(ARCHFAM);$(_ARCHFAM_);POCKETPC2003_UI_MODEL"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
@@ -204,6 +206,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\Manilla2D-DevTools-EnableM2D-App\Manilla2D-DevTools-EnableM2D-Util.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Manilla2D-DevTools-EnableM2D.cpp"
 				>
 				<FileConfiguration
@@ -224,7 +230,7 @@
 			Name="Resource Files"
 			>
 			<File
-				RelativePath=".\Manilla2D-DevTools-EnableM2D.ico"
+				RelativePath="..\Manilla2D-DevTools-EnableM2D-App\Manilla2D-DevTools-EnableM2D.ico"
 				>
 			</File>
 			<File
@@ -235,6 +241,10 @@
 		<Filter
 			Name="Header Files"
 			>
+			<File
+				RelativePath="..\Manilla2D-DevTools-EnableM2D-App\Manilla2D-DevTools-EnableM2D-Util.h"
+				>
+			</File>
 			<File
 				RelativePath=".\resource.h"
 				>

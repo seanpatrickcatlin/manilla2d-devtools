@@ -20,6 +20,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2C7B5C0C3E5747C9AC54D821AC8053A0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_54D8FDF1AE334BC58A6C37469E066F91"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -94,7 +100,7 @@
         {
             "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_258D133A000141FEADE6C98CE1C1220E"
             {
-            "SourcePath" = "8:..\\Manilla2D-DevTools-EnableM2D\\Windows Mobile 6 Professional SDK (ARMV4I)\\Release\\Manilla2D-DevTools-EnableM2D.dll"
+            "SourcePath" = "8:..\\Manilla2D-DevTools-EnableM2D\\Windows Mobile 6 Professional SDK (ARMV4I)\\Debug\\Manilla2D-DevTools-EnableM2D.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_27C3CDB530B1429DA0D3CDDDC698A24E"
@@ -118,9 +124,35 @@
                 {
                 }
             }
+            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_2C7B5C0C3E5747C9AC54D821AC8053A0"
+            {
+            "SourcePath" = "8:..\\Manilla2D-DevTools-EnableM2D-App\\Windows Mobile 6 Professional SDK (ARMV4I)\\Debug\\Manilla2D-DevTools-EnableM2D-App.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_27C3CDB530B1429DA0D3CDDDC698A24E"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:0"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{E4FD4360-C570-4953-9FBE-155F24FD6FD3}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
             "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_54D8FDF1AE334BC58A6C37469E066F91"
             {
-            "SourcePath" = "8:..\\Manilla2D-DevTools-DisableM2D\\Windows Mobile 6 Professional SDK (ARMV4I)\\Release\\Manilla2D-DevTools-DisableM2D.exe"
+            "SourcePath" = "8:..\\Manilla2D-DevTools-DisableM2D\\Windows Mobile 6 Professional SDK (ARMV4I)\\Debug\\Manilla2D-DevTools-DisableM2D.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_27C3CDB530B1429DA0D3CDDDC698A24E"
@@ -270,6 +302,16 @@
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "Target" = "8:_54D8FDF1AE334BC58A6C37469E066F91"
+            "Folder" = "8:_DCA773EB0BD04C13B5D4A0A2EDB146EA"
+            "WorkingFolder" = "8:_27C3CDB530B1429DA0D3CDDDC698A24E"
+            }
+            "{971D45E9-E38C-49AC-B36E-4C5BEA533350}:_454E105A1CED435E882F406F9228C959"
+            {
+            "Name" = "8:EnableM2D-DevTool"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "Target" = "8:_2C7B5C0C3E5747C9AC54D821AC8053A0"
             "Folder" = "8:_DCA773EB0BD04C13B5D4A0A2EDB146EA"
             "WorkingFolder" = "8:_27C3CDB530B1429DA0D3CDDDC698A24E"
             }
