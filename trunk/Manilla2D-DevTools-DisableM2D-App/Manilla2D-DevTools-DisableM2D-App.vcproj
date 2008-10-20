@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="Manilla2D-DevTools-DisableM2D"
-	ProjectGUID="{0A114824-9E83-4212-93AD-4D59C0C6B595}"
-	RootNamespace="Manilla2D-DevTools-DisableM2D"
+	Name="Manilla2D-DevTools-DisableM2D-App"
+	ProjectGUID="{CCA75C8A-1B75-4896-AEDF-550ABCB84DC1}"
+	RootNamespace="Manilla2D-DevTools-DisableM2D-App"
 	Keyword="MFCProj"
 	TargetFrameworkVersion="196613"
 	>
@@ -21,7 +21,7 @@
 			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
-			UseOfMFC="0"
+			UseOfMFC="1"
 			CharacterSet="1"
 			>
 			<Tool
@@ -48,7 +48,7 @@
 				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;$(ARCHFAM);$(_ARCHFAM_);POCKETPC2003_UI_MODEL"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -107,7 +107,7 @@
 			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
-			UseOfMFC="0"
+			UseOfMFC="1"
 			CharacterSet="1"
 			>
 			<Tool
@@ -135,7 +135,7 @@
 				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;$(ARCHFAM);$(_ARCHFAM_);POCKETPC2003_UI_MODEL"
 				MinimalRebuild="false"
 				RuntimeLibrary="0"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -201,8 +201,32 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\Manilla2D-DevTools-DisableM2D.cpp"
+				RelativePath=".\Manilla2D-DevTools-DisableM2D-App.cpp"
 				>
+			</File>
+			<File
+				RelativePath=".\Manilla2D-DevTools-DisableM2D-Util.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\stdafx.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 6 Professional SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
@@ -211,7 +235,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\Manilla2D-DevTools-DisableM2D-App.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Manilla2D-DevTools-DisableM2D-Util.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Resourceppc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\stdafx.h"
 				>
 			</File>
 		</Filter>
@@ -221,11 +257,22 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath=".\Manilla2D-DevTools-DisableM2D.ico"
+				RelativePath=".\res\Manilla2D-DevTools-DisableM2D-App.ico"
 				>
 			</File>
 			<File
-				RelativePath=".\Manilla2D-DevTools-DisableM2Dppc.rc"
+				RelativePath=".\Manilla2D-DevTools-DisableM2D-Appppc.rc"
+				>
+				<FileConfiguration
+					Name="Debug|Windows Mobile 6 Professional SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCResourceCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\res\Manilla2DDevToolsDisableM2DAppppc.rc2"
 				>
 			</File>
 		</Filter>
