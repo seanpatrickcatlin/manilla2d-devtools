@@ -36,6 +36,7 @@ struct TodayScreenSettings
 
 void DisableM2D();
 
+const char* GetConstCharStarFromCString(CString str);
 bool FileExists(CString pathToFile);
 CString GetPathToRunningBinary();
 CString GetDirectoryOfFile(CString fullFilePath);
