@@ -19,7 +19,10 @@
 #include "stdafx.h"
 #include "Manilla2D-DevTools-DisableM2D-Util.h"
 
-CString g_installDirectory;
+#include "tinyxml.h"
+#include "tinystr.h"
+
+std::string g_tempStr;
 
 void DisableM2D()
 {
@@ -30,6 +33,14 @@ void DisableM2D()
     WriteTodayScreenSettingsToRegistry(&settings);
 
     ::SendMessage(HWND_BROADCAST, WM_WININICHANGE, 0xF2, 0);
+}
+
+const char* GetConstCharStarFromCString(CString str)
+{
+    CT2CA pszConvertedAnsiString(str);
+	g_tempStr = pszConvertedAnsiString;
+
+	return g_tempStr.c_str();
 }
 
 CString GetPathToRunningBinary()
@@ -87,16 +98,7 @@ CString GetDirectoryOfFile(CString fullFilePath)
 
 CString GetPathToInstallDirectory()
 {
-    CString retVal;
-
-    if(g_installDirectory.GetLength() > 0)
-    {
-        retVal = g_installDirectory;
-    }
-    else
-    {
-	    retVal = GetDirectoryOfFile(GetPathToRunningBinary());
-    }
+    CString retVal = GetDirectoryOfFile(GetPathToRunningBinary());
 
 	TRACE(TEXT("GetPathToInstallDirectory "));
 	TRACE(retVal);
@@ -276,7 +278,9 @@ void ReadTodayScreenSettingsFromXml(TodayScreenSettings* regSettings)
         return;
     }
 
-    if(!FileExists(GetPathToTodaySettingsXmlFile()))
+    CString xmlFilePath = GetPathToTodaySettingsXmlFile();
+
+    if(!FileExists(xmlFilePath))
     {
         NameAndEnabledStateItem EnableM2D;
 
@@ -285,15 +289,43 @@ void ReadTodayScreenSettingsFromXml(TodayScreenSettings* regSettings)
 
         regSettings->itemVector.clear();
         regSettings->itemVector.push_back(EnableM2D);
-        
+
         regSettings->dateEnabled = TRUE;
     }
     else
     {
+        TiXmlDocument doc(GetConstCharStarFromCString(xmlFilePath));
+        bool loadOkay = doc.LoadFile();
 
+        if(loadOkay)
+        {
+            TiXmlNode* todayNode = doc.FirstChild("TodaySettings");
+
+            if(todayNode)
+            {
+                TiXmlElement* todayElement = todayNode->ToElement();
+
+                if(todayElement != NULL)
+                {
+                    todayElement->QueryIntAttribute("DateEnabled", &regSettings->dateEnabled);
+
+                    regSettings->itemVector.clear();
+
+                    for(TiXmlElement* itemElement = todayElement->FirstChildElement("Item");
+                        itemElement != NULL;
+                        itemElement = itemElement->NextSiblingElement("Item"))
+                    {
+                        NameAndEnabledStateItem currentItem;
+
+                        currentItem.name = itemElement->Attribute("Name");
+                        itemElement->QueryIntAttribute("Enabled", &currentItem.enabled);
+
+                        regSettings->itemVector.push_back(currentItem);
+                    }
+                }
+            }
+        }
     }
-
-
 }
 
 void WriteTodayScreenSettingsToXml(TodayScreenSettings* regSettings)
@@ -301,5 +333,50 @@ void WriteTodayScreenSettingsToXml(TodayScreenSettings* regSettings)
     if(regSettings == NULL)
     {
         return;
+    }
+
+    CString xmlFilePath = GetPathToTodaySettingsXmlFile();
+
+    if(!FileExists(xmlFilePath))
+    {
+        TiXmlDocument newdoc;
+        TiXmlDeclaration* decl = new TiXmlDeclaration("1.0", "", "");
+        TiXmlElement* element = new TiXmlElement("TodaySettings");
+        newdoc.LinkEndChild(decl);
+        newdoc.LinkEndChild(element);
+
+        newdoc.SaveFile(GetConstCharStarFromCString(xmlFilePath));
+    }
+
+    TiXmlDocument doc(GetConstCharStarFromCString(xmlFilePath));
+    bool loadOkay = doc.LoadFile();
+
+    if(loadOkay)
+    {
+        TiXmlNode* todayNode = doc.FirstChild("TodaySettings");
+
+        if(todayNode)
+        {
+            todayNode->Clear(); 
+            TiXmlElement* todayElement = todayNode->ToElement();
+
+            if(todayElement != NULL)
+            {
+                todayElement->SetAttribute("DateEnabled", regSettings->dateEnabled);
+            }
+
+            for(size_t i=0; i<regSettings->itemVector.size(); i++)
+            {
+                NameAndEnabledStateItem currentItem = regSettings->itemVector[i];
+
+                TiXmlElement* newItemElement = new TiXmlElement("Item");
+                newItemElement->SetAttribute("Name", GetConstCharStarFromCString(currentItem.name));
+                newItemElement->SetAttribute("Enabled", currentItem.enabled);
+
+                todayElement->LinkEndChild(newItemElement);
+            }
+
+            doc.SaveFile();
+        }
     }
 }

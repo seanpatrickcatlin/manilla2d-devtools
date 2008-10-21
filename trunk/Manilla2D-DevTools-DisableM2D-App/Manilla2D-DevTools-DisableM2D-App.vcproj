@@ -45,6 +45,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
+				AdditionalIncludeDirectories="&quot;..\tinyxml_2_5_3&quot;"
 				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;$(ARCHFAM);$(_ARCHFAM_);POCKETPC2003_UI_MODEL"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
@@ -132,6 +133,7 @@
 				ExecutionBucket="7"
 				Optimization="2"
 				FavorSizeOrSpeed="2"
+				AdditionalIncludeDirectories="&quot;..\tinyxml_2_5_3&quot;"
 				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;$(ARCHFAM);$(_ARCHFAM_);POCKETPC2003_UI_MODEL"
 				MinimalRebuild="false"
 				RuntimeLibrary="0"
@@ -228,6 +230,90 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<Filter
+				Name="TinyXML"
+				>
+				<File
+					RelativePath="..\tinyxml_2_5_3\tinystr.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 6 Professional SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\tinyxml_2_5_3\tinyxml.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 6 Professional SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\tinyxml_2_5_3\tinyxmlerror.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 6 Professional SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\tinyxml_2_5_3\tinyxmlparser.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Windows Mobile 6 Professional SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -250,6 +336,14 @@
 				RelativePath=".\stdafx.h"
 				>
 			</File>
+			<File
+				RelativePath="..\tinyxml_2_5_3\tinystr.h"
+				>
+			</File>
+			<File
+				RelativePath="..\tinyxml_2_5_3\tinyxml.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -263,13 +357,6 @@
 			<File
 				RelativePath=".\Manilla2D-DevTools-DisableM2D-Appppc.rc"
 				>
-				<FileConfiguration
-					Name="Debug|Windows Mobile 6 Professional SDK (ARMV4I)"
-					>
-					<Tool
-						Name="VCResourceCompilerTool"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\res\Manilla2DDevToolsDisableM2DAppppc.rc2"
