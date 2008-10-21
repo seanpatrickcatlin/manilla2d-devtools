@@ -373,5 +373,9 @@
 		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="Manilla2D-DevTools-DisableM2D-Settingsppc.rc"
+		/>
 	</Globals>
 </VisualStudioProject>

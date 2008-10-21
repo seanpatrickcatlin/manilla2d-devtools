@@ -2,6 +2,7 @@
 //
 
 #pragma once
+#include "afxcmn.h"
 
 // CManilla2DDevToolsDisableM2DSettingsDlg dialog
 class CManilla2DDevToolsDisableM2DSettingsDlg : public CDialog
@@ -30,4 +31,8 @@ protected:
 
 private:
     CCommandBar m_cmdBar;
+
+    void InitializeListControl();
+
+    CListCtrl m_todayItemsListCtrl;
 };

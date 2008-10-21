@@ -22,7 +22,8 @@ CManilla2DDevToolsDisableM2DSettingsDlg::CManilla2DDevToolsDisableM2DSettingsDlg
 
 void CManilla2DDevToolsDisableM2DSettingsDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
+    CDialog::DoDataExchange(pDX);
+    DDX_Control(pDX, IDC_TODAY_ITEMS_LIST, m_todayItemsListCtrl);
 }
 
 BEGIN_MESSAGE_MAP(CManilla2DDevToolsDisableM2DSettingsDlg, CDialog)
@@ -43,12 +44,44 @@ BOOL CManilla2DDevToolsDisableM2DSettingsDlg::OnInitDialog()
 
     m_cmdBar.Create(this);
     m_cmdBar.InsertMenuBar(IDR_APPLY_CANCEL_MENU);
+
+    m_todayItemsListCtrl.SetExtendedStyle(m_todayItemsListCtrl.GetExtendedStyle()|LVS_EX_CHECKBOXES);
+
+    InitializeListControl();
 	
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
 void CManilla2DDevToolsDisableM2DSettingsDlg::OnOK()
 {
+    int itemCount = m_todayItemsListCtrl.GetItemCount();
+
+    TodayScreenSettings listControlSettings;
+
+    listControlSettings.itemVector.clear();
+
+    for(int i=0; i<itemCount; i++)
+    {
+        BOOL currentCheckState = m_todayItemsListCtrl.GetCheck(i);
+        CString currentString = m_todayItemsListCtrl.GetItemText(i, 0);
+
+        if(currentString.CompareNoCase(TEXT("Date")) == 0)
+        {
+            listControlSettings.dateEnabled = currentCheckState;
+        }
+        else
+        {
+            NameAndEnabledStateItem itemSetting;
+
+            itemSetting.name = currentString;
+            itemSetting.enabled = currentCheckState;
+
+            listControlSettings.itemVector.push_back(itemSetting);
+        }
+    }
+
+    WriteTodayScreenSettingsToXml(&listControlSettings);
+
     CDialog::OnOK();
 }
 
@@ -84,4 +117,72 @@ void CManilla2DDevToolsDisableM2DSettingsDlg::OnPaint()
     dc.LineTo(nWidth, TITLE_HEADER_HEIGHT);
 
     dc.SelectObject(pOldPen);
+}
+
+void CManilla2DDevToolsDisableM2DSettingsDlg::InitializeListControl()
+{
+    // get teh registry settings
+    TodayScreenSettings regSettings;
+    ReadTodayScreenSettingsFromRegistry(&regSettings);
+
+    // get any settings form the xml
+    TodayScreenSettings xmlSettings = regSettings;
+    ReadTodayScreenSettingsFromXml(&xmlSettings);
+
+    // apply the xml settings to the reg settings
+    regSettings.dateEnabled = xmlSettings.dateEnabled;
+
+    for(size_t i=0; i<regSettings.itemVector.size(); i++)
+    {
+        NameAndEnabledStateItem* pRegItem = &regSettings.itemVector[i];
+
+        for(size_t j=0; j<xmlSettings.itemVector.size(); j++)
+        {
+            NameAndEnabledStateItem xmlItem = xmlSettings.itemVector[j];
+
+            if(pRegItem->name.Compare(xmlItem.name) == 0)
+            {
+                pRegItem->enabled = xmlItem.enabled;
+                break;
+            }
+        }
+    }
+
+    // populate the list control with the reg settings
+    m_todayItemsListCtrl.DeleteAllItems();
+
+    CHeaderCtrl* pListHeaderCtrl = m_todayItemsListCtrl.GetHeaderCtrl();
+
+    if(pListHeaderCtrl != NULL)
+    {
+        int headerItemCount = pListHeaderCtrl->GetItemCount();
+
+        if(headerItemCount != 1)
+        {
+            // remove all items
+            for(int i=headerItemCount; i > 0; i--)
+            {
+                pListHeaderCtrl->DeleteItem(i);
+            }
+
+            CRect lcRect;
+            m_todayItemsListCtrl.GetClientRect(&lcRect);
+            m_todayItemsListCtrl.InsertColumn(0, _T("Item Name"), LVCFMT_LEFT, lcRect.Width());
+        }
+    }
+
+    for(size_t i=0; i<regSettings.itemVector.size(); i++)
+    {
+        LPCTSTR pItemStr(regSettings.itemVector[i].name);
+
+        m_todayItemsListCtrl.InsertItem(i, pItemStr);
+        
+        m_todayItemsListCtrl.SetCheck(i, regSettings.itemVector[i].enabled);
+    }
+
+    LPCTSTR pDateStr(TEXT("Date"));
+    m_todayItemsListCtrl.InsertItem(0, pDateStr);
+    m_todayItemsListCtrl.SetCheck(0, regSettings.dateEnabled);
+
+    m_todayItemsListCtrl.SetFocus();
 }
