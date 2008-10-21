@@ -11,10 +11,9 @@ public:
 	CManilla2DDevToolsDisableM2DSettingsDlg(CWnd* pParent = NULL);	// standard constructor
 
 // Dialog Data
-	enum { IDD = IDD_MANILLA2DDEVTOOLSDISABLEM2DSETTINGS_DIALOG };
+	enum { IDD = IDD_M2D_DEVTOOLS_SETTINGS_DLG };
 
-
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
 
 // Implementation
@@ -23,8 +22,12 @@ protected:
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
-#if defined(_DEVICE_RESOLUTION_AWARE) && !defined(WIN32_PLATFORM_WFSP)
-	afx_msg void OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/);
-#endif
+    void OnPaint();
+    void OnOK();
+    void OnCancel();
+
 	DECLARE_MESSAGE_MAP()
+
+private:
+    CCommandBar m_cmdBar;
 };

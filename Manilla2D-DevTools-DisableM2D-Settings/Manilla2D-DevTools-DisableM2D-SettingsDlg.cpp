@@ -4,10 +4,13 @@
 #include "stdafx.h"
 #include "Manilla2D-DevTools-DisableM2D-Settings.h"
 #include "Manilla2D-DevTools-DisableM2D-SettingsDlg.h"
+#include "Manilla2D-DevTools-DisableM2D-Util.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+
+#define TITLE_HEADER_HEIGHT 24
 
 // CManilla2DDevToolsDisableM2DSettingsDlg dialog
 
@@ -23,10 +26,7 @@ void CManilla2DDevToolsDisableM2DSettingsDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CManilla2DDevToolsDisableM2DSettingsDlg, CDialog)
-#if defined(_DEVICE_RESOLUTION_AWARE) && !defined(WIN32_PLATFORM_WFSP)
-	ON_WM_SIZE()
-#endif
-	//}}AFX_MSG_MAP
+    ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 
@@ -41,23 +41,47 @@ BOOL CManilla2DDevToolsDisableM2DSettingsDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
-	// TODO: Add extra initialization here
+    m_cmdBar.Create(this);
+    m_cmdBar.InsertMenuBar(IDR_APPLY_CANCEL_MENU);
 	
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
-#if defined(_DEVICE_RESOLUTION_AWARE) && !defined(WIN32_PLATFORM_WFSP)
-void CManilla2DDevToolsDisableM2DSettingsDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
+void CManilla2DDevToolsDisableM2DSettingsDlg::OnOK()
 {
-	if (AfxIsDRAEnabled())
-	{
-		DRA::RelayoutDialog(
-			AfxGetResourceHandle(), 
-			this->m_hWnd, 
-			DRA::GetDisplayMode() != DRA::Portrait ? 
-			MAKEINTRESOURCE(IDD_MANILLA2DDEVTOOLSDISABLEM2DSETTINGS_DIALOG_WIDE) : 
-			MAKEINTRESOURCE(IDD_MANILLA2DDEVTOOLSDISABLEM2DSETTINGS_DIALOG));
-	}
+    CDialog::OnOK();
 }
-#endif
 
+void CManilla2DDevToolsDisableM2DSettingsDlg::OnCancel()
+{
+    CDialog::OnCancel();
+}
+
+void CManilla2DDevToolsDisableM2DSettingsDlg::OnPaint()
+{
+    CPaintDC dc(this);
+
+    int nWidth = dc.GetDeviceCaps(HORZRES);
+
+    // paint title
+    CFont *pCurrentFont = dc.GetCurrentFont();
+    LOGFONT lf;
+    pCurrentFont->GetLogFont(&lf);
+    lf.lfWeight = FW_BOLD;
+
+    CFont newFont;
+    newFont.CreateFontIndirect(&lf);
+    CFont *pSave = dc.SelectObject(&newFont);
+    dc.SetTextColor(RGB(0, 0, 156));
+    dc.DrawText(TEXT("Today Screen Items"), CRect(8, 0, nWidth, TITLE_HEADER_HEIGHT), DT_VCENTER | DT_SINGLELINE);
+    dc.SelectObject(pSave);
+
+    // paint line
+    CPen blackPen(PS_SOLID, 1, RGB(0,0,0));
+    CPen *pOldPen = dc.SelectObject(&blackPen);
+
+    dc.MoveTo(0, TITLE_HEADER_HEIGHT);
+    dc.LineTo(nWidth, TITLE_HEADER_HEIGHT);
+
+    dc.SelectObject(pOldPen);
+}
