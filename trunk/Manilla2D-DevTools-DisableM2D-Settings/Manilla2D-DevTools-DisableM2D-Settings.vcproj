@@ -45,7 +45,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\Manilla2D-DevTools-DisableM2D-App&quot;"
+				AdditionalIncludeDirectories="&quot;..\Manilla2D-DevTools-DisableM2D-App&quot;;..\tinyxml_2_5_3"
 				PreprocessorDefinitions="_DEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;DEBUG;$(ARCHFAM);$(_ARCHFAM_);POCKETPC2003_UI_MODEL"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
@@ -133,7 +133,7 @@
 				ExecutionBucket="7"
 				Optimization="2"
 				FavorSizeOrSpeed="2"
-				AdditionalIncludeDirectories="&quot;..\Manilla2D-DevTools-DisableM2D-App&quot;"
+				AdditionalIncludeDirectories="&quot;..\Manilla2D-DevTools-DisableM2D-App&quot;;&quot;..\tinyxml_2_5_3&quot;"
 				PreprocessorDefinitions="NDEBUG;_WIN32_WCE=$(CEVER);UNDER_CE;$(PLATFORMDEFINES);WINCE;$(ARCHFAM);$(_ARCHFAM_);POCKETPC2003_UI_MODEL"
 				MinimalRebuild="false"
 				RuntimeLibrary="0"
@@ -365,20 +365,6 @@
 			<File
 				RelativePath=".\Manilla2D-DevTools-DisableM2D-Settingsppc.rc"
 				>
-				<FileConfiguration
-					Name="Debug|Windows Mobile 6 Professional SDK (ARMV4I)"
-					>
-					<Tool
-						Name="VCResourceCompilerTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
-					>
-					<Tool
-						Name="VCResourceCompilerTool"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\res\Manilla2DDevToolsDisableM2DSettingsppc.rc2"

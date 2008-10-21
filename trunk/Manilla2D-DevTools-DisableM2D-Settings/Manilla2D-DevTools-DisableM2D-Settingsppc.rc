@@ -71,61 +71,12 @@ IDR_MAINFRAME           ICON                    "res\\Manilla2D-DevTools-Disable
 // Dialog
 //
 
-IDD_MANILLA2DDEVTOOLSDISABLEM2DSETTINGS_DIALOG DIALOG  0, 0, 156, 129
+IDD_M2D_DEVTOOLS_SETTINGS_DLG DIALOG  0, 0, 156, 156
 STYLE DS_SETFONT | WS_POPUP | WS_VISIBLE | WS_CAPTION
 EXSTYLE WS_EX_APPWINDOW | 0x80000000L
-CAPTION "Manilla2D-DevTools-DisableM2D-Settings"
+CAPTION "DisableM2D-DevTool-Settings"
 FONT 8, "MS Sans Serif"
 BEGIN
-    LTEXT           "TODO: Place dialog controls here.",IDC_STATIC_1,24,48,112,23
-END
-
-IDD_MANILLA2DDEVTOOLSDISABLEM2DSETTINGS_DIALOG_WIDE DIALOG  0, 0, 210, 129
-STYLE DS_SETFONT | WS_POPUP | WS_VISIBLE | WS_CAPTION
-EXSTYLE WS_EX_APPWINDOW | 0x80000000L
-CAPTION "Manilla2D-DevTools-DisableM2D-Settings"
-FONT 8, "MS Sans Serif"
-BEGIN
-    LTEXT           "TODO: Place dialog controls here.",IDC_STATIC_1,57,49,112,23
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Version
-//
-
-VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,1
- PRODUCTVERSION 1,0,0,1
- FILEFLAGSMASK 0x3fL
-#ifdef _DEBUG
- FILEFLAGS 0x1L
-#else
- FILEFLAGS 0x0L
-#endif
- FILEOS 0x4L
- FILETYPE 0x1L
- FILESUBTYPE 0x0L
-BEGIN
-    BLOCK "StringFileInfo"
-    BEGIN
-        BLOCK "040904e4"
-        BEGIN
-            VALUE "CompanyName", "TODO: <Company name>"
-            VALUE "FileDescription", "TODO: <File description>"
-            VALUE "FileVersion", "1.0.0.1"
-            VALUE "InternalName", "Manilla2D-DevTools-DisableM2D-Settings.exe"
-            VALUE "LegalCopyright", "TODO: (c) <Company name>.  All rights reserved."
-            VALUE "OriginalFilename", "Manilla2D-DevTools-DisableM2D-Settings.exe"
-            VALUE "ProductName", "TODO: <Product name>"
-            VALUE "ProductVersion", "1.0.0.1"
-        END
-    END
-    BLOCK "VarFileInfo"
-    BEGIN
-        VALUE "Translation", 0x409, 1252
-    END
 END
 
 
@@ -137,20 +88,12 @@ END
 #ifdef APSTUDIO_INVOKED
 GUIDELINES DESIGNINFO 
 BEGIN
-    IDD_MANILLA2DDEVTOOLSDISABLEM2DSETTINGS_DIALOG, DIALOG
+    IDD_M2D_DEVTOOLS_SETTINGS_DLG, DIALOG
     BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 149
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 122
-    END
-
-    IDD_MANILLA2DDEVTOOLSDISABLEM2DSETTINGS_DIALOG_WIDE, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 203
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 122
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 152
+        TOPMARGIN, 20
+        BOTTOMMARGIN, 148
     END
 END
 #endif    // APSTUDIO_INVOKED
