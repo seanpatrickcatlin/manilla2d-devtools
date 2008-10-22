@@ -5,7 +5,6 @@
 #define IDD_M2D_DEVTOOLS_SETTINGS_DLG   101
 #define IDR_MAINFRAME                   128
 #define IDR_APPLY_CANCEL_MENU           129
-#define IDC_TOAYD_ITMES_LIST            1000
 #define IDC_TODAY_ITEMS_LIST            1000
 
 // Next default values for new objects
