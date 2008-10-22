@@ -16,26 +16,26 @@
 */
 
 
-// Manilla2D-DevTools-DisableM2D-Settings.cpp : Defines the class behaviors for the application.
+// Manilla2D-DevTools-SimpleSkinM2D.cpp : Defines the class behaviors for the application.
 //
 
 #include "stdafx.h"
-#include "Manilla2D-DevTools-DisableM2D-Settings.h"
-#include "Manilla2D-DevTools-DisableM2D-SettingsDlg.h"
+#include "Manilla2D-DevTools-SimpleSkinM2D.h"
+#include "Manilla2D-DevTools-SimpleSkinM2DDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// CManilla2DDevToolsDisableM2DSettingsApp
+// CManilla2DDevToolsSimpleSkinM2DApp
 
-BEGIN_MESSAGE_MAP(CManilla2DDevToolsDisableM2DSettingsApp, CWinApp)
+BEGIN_MESSAGE_MAP(CManilla2DDevToolsSimpleSkinM2DApp, CWinApp)
 END_MESSAGE_MAP()
 
 
-// CManilla2DDevToolsDisableM2DSettingsApp construction
-CManilla2DDevToolsDisableM2DSettingsApp::CManilla2DDevToolsDisableM2DSettingsApp()
+// CManilla2DDevToolsSimpleSkinM2DApp construction
+CManilla2DDevToolsSimpleSkinM2DApp::CManilla2DDevToolsSimpleSkinM2DApp()
 	: CWinApp()
 {
 	// TODO: add construction code here,
@@ -43,12 +43,12 @@ CManilla2DDevToolsDisableM2DSettingsApp::CManilla2DDevToolsDisableM2DSettingsApp
 }
 
 
-// The one and only CManilla2DDevToolsDisableM2DSettingsApp object
-CManilla2DDevToolsDisableM2DSettingsApp theApp;
+// The one and only CManilla2DDevToolsSimpleSkinM2DApp object
+CManilla2DDevToolsSimpleSkinM2DApp theApp;
 
-// CManilla2DDevToolsDisableM2DSettingsApp initialization
+// CManilla2DDevToolsSimpleSkinM2DApp initialization
 
-BOOL CManilla2DDevToolsDisableM2DSettingsApp::InitInstance()
+BOOL CManilla2DDevToolsSimpleSkinM2DApp::InitInstance()
 {
     // SHInitExtraControls should be called once during your application's initialization to initialize any
     // of the Windows Mobile specific controls such as CAPEDIT and SIPPREF.
@@ -63,7 +63,7 @@ BOOL CManilla2DDevToolsDisableM2DSettingsApp::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
-	CManilla2DDevToolsDisableM2DSettingsDlg dlg;
+	CManilla2DDevToolsSimpleSkinM2DDlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)
