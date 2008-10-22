@@ -16,35 +16,37 @@
 */
 
 
-// Manilla2D-DevTools-DisableM2D-Settings.h : main header file for the PROJECT_NAME application
+// Manilla2D-DevTools-SimpleSkinM2DDlg.h : header file
 //
 
 #pragma once
 
-#ifndef __AFXWIN_H__
-	#error "include 'stdafx.h' before including this file for PCH"
-#endif
-
-#ifdef POCKETPC2003_UI_MODEL
-#include "resourceppc.h"
-#endif 
-
-// CManilla2DDevToolsDisableM2DSettingsApp:
-// See Manilla2D-DevTools-DisableM2D-Settings.cpp for the implementation of this class
-//
-
-class CManilla2DDevToolsDisableM2DSettingsApp : public CWinApp
+// CManilla2DDevToolsSimpleSkinM2DDlg dialog
+class CManilla2DDevToolsSimpleSkinM2DDlg : public CDialog
 {
+// Construction
 public:
-	CManilla2DDevToolsDisableM2DSettingsApp();
-	
-// Overrides
-public:
-	virtual BOOL InitInstance();
+	CManilla2DDevToolsSimpleSkinM2DDlg(CWnd* pParent = NULL);	// standard constructor
+
+// Dialog Data
+	enum { IDD = IDD_M2D_DEVTOOLS_SIMPLESKIN_DLG };
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
 
 // Implementation
+protected:
+	HICON m_hIcon;
+
+	// Generated message map functions
+	virtual BOOL OnInitDialog();
 
 	DECLARE_MESSAGE_MAP()
-};
 
-extern CManilla2DDevToolsDisableM2DSettingsApp theApp;
+    void OnPaint();
+    void OnOK();
+    void OnCancel();
+
+private:
+    CCommandBar m_cmdBar;
+};
